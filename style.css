@@ -1,0 +1,2413 @@
+/* ============================================================
+
+   1) VARIABLES — EDIT THIS: Re-theme the entire site here.
+
+   ============================================================ */
+
+:root {
+
+  --color-navy: #0B1F3A;
+
+  --color-cream: #F6F0E0;
+
+  --color-lime: #C8F03C;
+
+  --color-navy-soft: #18304E;
+
+  --color-cream-muted: #D4CCBA;
+
+  --color-cream-line: rgba(11,31,58,.2);
+
+  --color-navy-line: rgba(246,240,224,.25);
+
+  --color-shadow: rgba(0,0,0,.16);
+
+  --font-display: 'Space Grotesk', 'Arial Black', sans-serif;
+
+  --font-body: 'DM Sans', Arial, sans-serif;
+
+  --font-size-base: 1rem;
+
+  --font-size-small: .78rem;
+
+  --font-size-lead: clamp(1.35rem,2.4vw,2.25rem);
+
+  --font-size-heading: clamp(3.25rem,7.8vw,8.4rem);
+
+  --font-size-hero: clamp(4rem,9.4vw,10.8rem);
+
+  --space-1: .5rem;
+
+  --space-2: 1rem;
+
+  --space-3: 1.5rem;
+
+  --space-4: 2rem;
+
+  --space-5: 3rem;
+
+  --space-6: 4.5rem;
+
+  --space-7: 7rem;
+
+  --space-section: clamp(5.5rem,12vw,11rem);
+
+  --container-width: 90rem;
+
+  --gutter: clamp(1.25rem,5vw,5rem);
+
+  --radius-small: .25rem;
+
+  --radius-round: 50%;
+
+  --header-height: 5.25rem;
+
+  --ease-out: cubic-bezier(.22,1,.36,1);
+
+  --ease-in-out: cubic-bezier(.76,0,.24,1);
+
+  --duration-fast: 280ms;
+
+  --duration-medium: 450ms;
+
+  --duration-long: 580ms;
+
+}
+
+
+
+/* ============================================================
+
+   2) RESET / BASE
+
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: var(--header-height); }
+
+body { margin: 0; min-width: 320px; background: var(--color-navy); color: var(--color-cream); font: 400 var(--font-size-base)/1.65 var(--font-body); }
+
+body, h1, h2, h3, p { margin-block-start: 0; }
+
+a { color: inherit; text-decoration: none; }
+
+button, input { font: inherit; }
+
+img, svg { max-width: 100%; display: block; }
+
+::selection { background: var(--color-lime); color: var(--color-navy); }
+
+:focus-visible { outline: 3px solid var(--color-lime); outline-offset: 5px; }
+
+.section--cream :focus-visible { outline-color: var(--color-navy); }
+
+.skip-link { position: fixed; top: -5rem; left: 1rem; z-index: 100; padding: .65rem 1rem; background: var(--color-lime); color: var(--color-navy); font-weight: 700; }
+
+.skip-link:focus { top: 1rem; }
+
+
+
+/* ============================================================
+
+   3) TYPOGRAPHY
+
+   ============================================================ */
+
+h1, h2, h3 { font-family: var(--font-display); font-weight: 600; line-height: .97; letter-spacing: -.07em; }
+
+h1 em, h2 em { font-style: normal; font-weight: 400; letter-spacing: -.082em; }
+
+p { max-width: 65ch; }
+
+.eyebrow, .section__number, .project__meta { font-size: var(--font-size-small); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+
+.eyebrow { color: var(--color-navy); }
+
+.eyebrow--light { color: var(--color-cream-muted); }
+
+.section__heading { font-size: var(--font-size-heading); margin: 0; }
+
+.section--cream .section__heading { color: var(--color-navy); }
+
+.section--navy .section__heading { color: var(--color-cream); }
+
+.text-accent { color: var(--color-lime); }
+
+.lead { font-family: var(--font-display); font-size: var(--font-size-lead); font-weight: 500; line-height: 1.26; letter-spacing: -.04em; }
+
+.highlight { box-shadow: inset 0 -.3em 0 var(--color-lime); }
+
+
+
+/* ============================================================
+
+   4) LAYOUT
+
+   ============================================================ */
+
+.container { width: min(100% - (var(--gutter) * 2), var(--container-width)); margin-inline: auto; }
+
+.section { position: relative; overflow: clip; }
+
+.section--navy { background: var(--color-navy); color: var(--color-cream); }
+
+.section--cream { background: var(--color-cream); color: var(--color-navy); }
+
+.section__inner { padding-block: var(--space-section); }
+
+.section__rail { display: flex; align-items: center; gap: var(--space-3); margin-bottom: clamp(3rem,8vw,7rem); }
+
+.section__number { flex-shrink: 0; }
+
+.section__rail-line { height: 1px; width: 100%; background: currentColor; opacity: .24; }
+
+
+
+/* ============================================================
+
+   5) COMPONENTS — navigation, buttons, details, interactions
+
+   ============================================================ */
+
+/* Sticky editorial header; :target controls its mobile state. */
+
+.site-header { position: absolute; z-index: 50; top: 0; left: 0; width: 100%; height: var(--header-height); border-bottom: 1px solid var(--color-navy-line); background: var(--color-navy); }
+
+.site-header__inner { display: flex; justify-content: space-between; align-items: center; height: 100%; }
+
+.site-header__brand { font: 700 1.65rem/1 var(--font-display); letter-spacing: -.09em; }
+
+.site-header__brand span { color: var(--color-lime); }
+
+.site-nav { display: flex; align-items: center; gap: clamp(1rem,2.2vw,2.4rem); }
+
+.site-nav__link { position: relative; padding-block: .65rem; font-size: .83rem; font-weight: 600; }
+
+.site-nav__link::after { content: ''; position: absolute; bottom: .35rem; left: 0; width: 100%; height: 2px; background: var(--color-lime); transform: scaleX(0); transform-origin: right; transition: transform var(--duration-medium) var(--ease-out); }
+
+.site-nav__link:hover::after, .site-nav__link:focus-visible::after { transform: scaleX(1); transform-origin: left; }
+
+.site-nav__link--contact { color: var(--color-lime); }
+
+.site-nav__close, .site-header__menu-open { display: none; }
+
+.button { display: inline-flex; align-items: center; justify-content: space-between; gap: 2rem; min-height: 3.55rem; padding: .85rem 1.4rem; font-size: .89rem; font-weight: 700; border: 1px solid transparent; transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out), background var(--duration-fast) var(--ease-out); }
+
+.button--lime { background: var(--color-lime); color: var(--color-navy); }
+
+.button:hover, .button:focus-visible { transform: translateY(-4px); box-shadow: 6px 6px 0 var(--color-cream); }
+
+.text-link { display: inline-flex; align-items: center; gap: 1.5rem; padding-block: .5rem; border-bottom: 1px solid currentColor; font-size: .9rem; font-weight: 700; transition: gap var(--duration-fast) var(--ease-out); }
+
+.text-link:hover, .text-link:focus-visible { gap: 2.2rem; }
+
+.text-link--light { color: var(--color-cream); }
+
+.scroll-progress { position: fixed; z-index: 90; top: 0; left: 0; width: 100%; height: 4px; background: var(--color-lime); transform: scaleX(0); transform-origin: left; pointer-events: none; }
+
+/* Experience accordion: native keyboard controls and semantic state. */
+
+.accordion__item { border-top: 1px solid var(--color-cream-line); }
+
+.accordion__item:last-child { border-bottom: 1px solid var(--color-cream-line); }
+
+.accordion__summary { display: grid; grid-template-columns: 2.5rem 1fr 2rem; align-items: start; gap: 1rem; padding: 1.65rem 0; cursor: pointer; list-style: none; }
+
+.accordion__summary::-webkit-details-marker { display: none; }
+
+.accordion__index { padding-top: .23rem; color: #52617A; font-size: .76rem; }
+
+.accordion__title { font: 600 clamp(1.25rem,2vw,1.8rem)/1.15 var(--font-display); letter-spacing: -.04em; }
+
+.accordion__title small { display: block; margin-top: .7rem; font: 400 .85rem/1.5 var(--font-body); letter-spacing: 0; }
+
+.accordion__icon { position: relative; width: 1.5rem; height: 1.5rem; border: 1px solid var(--color-navy); border-radius: var(--radius-round); transition: background var(--duration-fast), transform var(--duration-medium) var(--ease-out); }
+
+.accordion__icon::before, .accordion__icon::after { content: ''; position: absolute; top: 50%; left: 50%; width: .65rem; height: 1px; background: var(--color-navy); transform: translate(-50%,-50%); }
+
+.accordion__icon::after { transform: translate(-50%,-50%) rotate(90deg); }
+
+.accordion__item[open] .accordion__icon { background: var(--color-lime); transform: rotate(45deg); }
+
+.accordion__content { padding: 0 3rem 1.5rem 3.5rem; color: var(--color-navy-soft); }
+
+.accordion__content p { margin-bottom: 0; }
+
+@supports (interpolate-size: allow-keywords) {
+
+  .accordion { interpolate-size: allow-keywords; }
+
+  .accordion__item::details-content { block-size: 0; overflow: hidden; transition: block-size var(--duration-medium) var(--ease-out), content-visibility var(--duration-medium) allow-discrete; }
+
+  .accordion__item[open]::details-content { block-size: auto; }
+
+}
+
+
+
+/* ============================================================
+
+   6) SECTIONS
+
+   ============================================================ */
+
+/* HERO: Oversized typography, abstract photo frame and ticker. */
+
+.hero { padding-top: var(--header-height); }
+
+.hero__layout { min-height: min(790px,84svh); display: grid; grid-template-columns: minmax(0,1.35fr) minmax(260px,.65fr); align-items: center; gap: 3rem; padding-block: 5rem 4rem; }
+
+.hero__content { position: relative; z-index: 2; }
+
+.hero__content .eyebrow { display: flex; align-items: center; gap: .8rem; }
+
+.eyebrow__line { display: inline-block; width: 1.5rem; height: 2px; background: var(--color-lime); }
+
+.hero__title { margin: 2.3rem 0 2rem; font-size: var(--font-size-hero); max-width: 10ch; }
+
+.hero__title em { color: var(--color-cream-muted); }
+
+.hero__intro { max-width: 33rem; color: var(--color-cream-muted); font-size: 1.05rem; }
+
+.hero__intro span { color: var(--color-cream); }
+
+.hero__actions { display: flex; align-items: center; flex-wrap: wrap; gap: 1.5rem 2.1rem; margin-top: 2.5rem; }
+
+.hero__visual { position: relative; width: 100%; height: clamp(340px,39vw,550px); align-self: center; }
+
+.hero__portrait { position: absolute; inset: 7% 4% 6% 14%; display: grid; place-items: center; overflow: hidden; background: var(--color-cream-muted); color: var(--color-navy); clip-path: polygon(0 0,100% 0,100% 83%,79% 100%,0 100%); }
+
+.hero__portrait::before { content: ''; position: absolute; width: 90%; aspect-ratio: 1; border: 1px solid rgba(11,31,58,.3); border-radius: 50%; transform: translate(32%,24%); }
+
+.hero__portrait span { z-index: 1; font: 700 clamp(1.3rem,2.8vw,3rem)/1.05 var(--font-display); letter-spacing: -.05em; text-align: center; opacity: .5; }
+
+.hero__orbit { position: absolute; top: 0; left: 0; width: clamp(86px,11vw,150px); aspect-ratio: 1; border: 1px dashed var(--color-lime); border-radius: 50%; transform: rotate(-25deg); }
+
+.hero__orbit::after { content: '✳'; position: absolute; top: 50%; left: 50%; color: var(--color-lime); font-size: 3rem; transform: translate(-50%,-50%); }
+
+.hero__orbit-dot { position: absolute; top: 50%; left: -5px; width: 10px; height: 10px; border-radius: 50%; background: var(--color-lime); }
+
+.hero__visual-caption { position: absolute; bottom: 0; right: 3%; writing-mode: vertical-rl; transform: rotate(180deg); font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; }
+
+.hero__ticker { overflow: hidden; border-top: 1px solid var(--color-navy-line); border-bottom: 1px solid var(--color-navy-line); padding: .8rem 0; }
+
+.hero__ticker-track { display: flex; width: max-content; animation: marquee 27s linear infinite; }
+
+.hero__ticker-track > span { display: block; flex: 0 0 auto; white-space: nowrap; padding-right: 2rem; font: 500 clamp(1.1rem,2vw,1.7rem)/1.5 var(--font-display); letter-spacing: -.04em; }
+
+.hero__ticker-track i { padding-inline: 1rem; font-style: normal; color: var(--color-lime); }
+
+.hero__ticker:hover .hero__ticker-track { animation-play-state: paused; }
+
+/* ABOUT: deliberately asymmetric reading columns. */
+
+.about__layout { display: grid; grid-template-columns: 1.13fr .87fr; gap: clamp(3rem,9vw,10rem); align-items: start; }
+
+.about__copy { padding-top: clamp(0rem,8vw,7rem); }
+
+.about__copy p:not(.lead) { font-size: 1rem; color: var(--color-navy-soft); }
+
+.about__copy .text-link { margin-top: 1.5rem; }
+
+/* JOURNEY: full-width editorial timeline, not a card grid. */
+
+.journey__intro { display: flex; align-items: end; justify-content: space-between; gap: 3rem; margin-bottom: 5rem; }
+
+.journey__aside { max-width: 19rem; margin-bottom: 1rem; color: var(--color-cream-muted); }
+
+.timeline__item { display: grid; grid-template-columns: minmax(130px,.25fr) 1fr 2.5rem; align-items: start; gap: 2rem; border-top: 1px solid var(--color-navy-line); padding-block: 2rem; }
+
+.timeline__item:last-child { border-bottom: 1px solid var(--color-navy-line); }
+
+.timeline__date { color: var(--color-lime); font-size: .83rem; font-weight: 700; }
+
+.timeline__body h3 { margin: 0 0 .7rem; font-size: clamp(1.6rem,3vw,2.8rem); }
+
+.timeline__body p { color: var(--color-cream-muted); margin: 0; }
+
+.timeline__mark { justify-self: end; font-size: 1.5rem; color: var(--color-lime); }
+
+/* EXPERIENCE: single column of expandable experiences. */
+
+.experience__layout { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(3rem,8vw,9rem); }
+
+.experience__note { max-width: 23rem; margin-top: 2rem; }
+
+.accordion { padding-top: .5rem; }
+
+/* PROJECTS: image wipe + body shift on hover and keyboard focus. */
+
+.projects__intro { display: flex; justify-content: space-between; align-items: end; gap: 3rem; margin-bottom: 5rem; }
+
+.projects__intro > p { max-width: 21rem; color: var(--color-cream-muted); }
+
+.projects__list { display: grid; gap: 3.5rem; }
+
+.project { display: grid; grid-template-columns: 1.07fr .93fr; min-height: 370px; border-top: 1px solid var(--color-navy-line); padding-top: 2rem; }
+
+.project__media { position: relative; display: grid; place-items: center; min-height: 330px; overflow: hidden; isolation: isolate; background: var(--color-cream-muted); color: var(--color-navy); clip-path: polygon(0 0,100% 0,100% 100%,0 100%); transition: clip-path var(--duration-long) var(--ease-in-out); }
+
+.project__media::before { content: ''; position: absolute; width: 42%; aspect-ratio: 1; border: 2.2rem solid var(--color-navy); border-radius: 50%; opacity: .8; transform: translate(-20%,-10%); transition: transform var(--duration-long) var(--ease-out); }
+
+.project__media--two { background: var(--color-navy-soft); color: var(--color-cream); }
+
+.project__media--two::before { width: 38%; border-radius: 0; border-width: 1rem; border-color: var(--color-cream); transform: rotate(22deg); }
+
+.project__media > span:first-child { z-index: 2; font: 700 .8rem var(--font-display); letter-spacing: .13em; }
+
+.project__wipe { position: absolute; inset: 0; z-index: 1; background: var(--color-lime); clip-path: inset(0 100% 0 0); transition: clip-path var(--duration-long) var(--ease-in-out); }
+
+.project__body { position: relative; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: clamp(2rem,5vw,5rem); transition: transform var(--duration-medium) var(--ease-out); }
+
+.project__meta { color: var(--color-lime); }
+
+.project__body h3 { font-size: clamp(2.2rem,4vw,4.8rem); margin: 1rem 0; }
+
+.project__body > p:not(.project__meta) { max-width: 24rem; color: var(--color-cream-muted); }
+
+.project__tag { border: 1px solid var(--color-navy-line); padding: .35rem .75rem; font-size: .75rem; }
+
+.project__link { margin-top: 1.3rem; border-bottom: 1px solid var(--color-lime); color: var(--color-lime); font-size: .84rem; font-weight: 700; }
+
+.project__arrow { position: absolute; top: 2rem; right: 2rem; color: var(--color-lime); font-size: 2rem; transition: transform var(--duration-medium) var(--ease-out); }
+
+.project:hover .project__wipe, .project:focus-within .project__wipe { clip-path: inset(0 0 0 0); }
+
+.project:hover .project__media::before, .project:focus-within .project__media::before { transform: translate(25%,15%) rotate(40deg); }
+
+.project:hover .project__body, .project:focus-within .project__body { transform: translateX(9px); }
+
+.project:hover .project__arrow, .project:focus-within .project__arrow { transform: translate(5px,-5px); }
+
+/* :has() adds an enhancement; hover above works without it. */
+
+.projects__list:has(.project:hover) .project:not(:hover) { opacity: .7; transition: opacity var(--duration-medium); }
+
+.projects__footnote { margin: 3rem 0 0; font-size: .85rem; }
+
+.projects__footnote span { color: var(--color-cream-muted); }
+
+/* INTERESTS: fully CSS-drawn record, with a subtle animated spin. */
+
+.interests__layout { display: grid; grid-template-columns: 1.1fr .9fr; gap: 3rem; align-items: center; }
+
+.interests__copy { margin-top: 2.2rem; font-size: 1.1rem; }
+
+.record { position: relative; display: grid; justify-items: center; padding: 4rem 0 2rem; }
+
+.record__disc { position: relative; display: grid; place-items: center; width: min(100%,430px); aspect-ratio: 1; border-radius: 50%; background: repeating-radial-gradient(circle at center,var(--color-navy) 0,var(--color-navy) 8px,#1B3654 9px,#1B3654 10px); box-shadow: 25px 25px 0 var(--color-lime); animation: record-spin 24s linear infinite; }
+
+.record__disc::before { content: ''; position: absolute; inset: 11%; border: 1px solid rgba(246,240,224,.35); border-radius: 50%; }
+
+.record__label { display: grid; place-items: center; width: 31%; aspect-ratio: 1; border: 8px solid var(--color-navy); border-radius: 50%; background: var(--color-lime); color: var(--color-navy); text-align: center; font: 700 clamp(.68rem,1.5vw,1rem)/1.25 var(--font-display); letter-spacing: .04em; }
+
+.record__caption { margin-top: 3rem; font-size: .76rem; letter-spacing: .12em; text-transform: uppercase; }
+
+/* CONTACT: oversized sign-off with understated links. */
+
+.contact__heading { font-size: clamp(4.5rem,11vw,12rem); margin: 1rem 0 2rem; }
+
+.contact__heading em { color: var(--color-cream-muted); }
+
+.contact__copy { color: var(--color-cream-muted); }
+
+.contact__email { display: inline-flex; align-items: center; gap: 1rem; margin: 2rem 0 5rem; padding-bottom: .6rem; border-bottom: 2px solid var(--color-lime); color: var(--color-lime); font: 500 clamp(1.4rem,3vw,3rem)/1.2 var(--font-display); overflow-wrap: anywhere; transition: gap var(--duration-fast) var(--ease-out); }
+
+.contact__email:hover, .contact__email:focus-visible { gap: 2rem; }
+
+.contact__bottom { display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--color-navy-line); font-size: .8rem; text-transform: uppercase; letter-spacing: .1em; }
+
+.contact__links { display: flex; flex-wrap: wrap; gap: 2rem; }
+
+.contact__links a:hover, .contact__links a:focus-visible { color: var(--color-lime); }
+
+.site-footer { background: var(--color-navy); color: var(--color-cream-muted); border-top: 1px solid var(--color-navy-line); }
+
+.site-footer__inner { min-height: 6rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem 2rem; font-size: .75rem; }
+
+.site-footer a { color: var(--color-lime); }
+
+
+
+/* ============================================================
+
+   7) ANIMATIONS — scroll timelines have visible fallbacks.
+
+   SIGNATURE INTERACTION: the dotted lime 'idea compass' around
+
+   the hero image morphs and rotates with page-scroll progress.
+
+   ============================================================ */
+
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+@keyframes record-spin { to { transform: rotate(360deg); } }
+
+@keyframes reveal-up { from { opacity: .25; transform: translateY(48px); } to { opacity: 1; transform: translateY(0); } }
+
+@keyframes track-progress { to { transform: scaleX(1); } }
+
+@keyframes idea-compass { from { transform: rotate(-25deg) scale(.8); border-radius: 50%; } to { transform: rotate(300deg) scale(1.16); border-radius: 28%; } }
+
+@supports (animation-timeline: scroll()) {
+
+  .scroll-progress { animation: track-progress linear both; animation-timeline: scroll(root block); }
+
+  .hero__orbit { animation: idea-compass linear both; animation-timeline: scroll(root block); }
+
+}
+
+@supports (animation-timeline: view()) {
+
+  .reveal { animation: reveal-up linear both; animation-timeline: view(); animation-range: entry 0% cover 27%; }
+
+}
+
+/* Fallback: unsupported browsers see complete, unhidden content,
+
+   a stationary compass, and no scroll progress bar. */
+
+
+
+/* ============================================================
+
+   8) RESPONSIVE — tablet and mobile, entirely CSS.
+
+   ============================================================ */
+
+@media (max-width: 1100px) {
+
+  .site-nav { gap: 1rem; }
+
+  .site-nav__link { font-size: .75rem; }
+
+  .hero__layout { grid-template-columns: minmax(0,1.2fr) minmax(230px,.8fr); }
+
+  .hero__title { font-size: clamp(4rem,9vw,8rem); }
+
+  .about__layout, .experience__layout { gap: 3rem; }
+
+}
+
+@media (max-width: 800px) {
+
+  :root { --header-height: 4.5rem; --space-section: 6rem; --font-size-heading: clamp(3.25rem,9vw,6rem); }
+
+  .site-header__menu-open { display: flex; flex-direction: column; justify-content: center; gap: 7px; width: 42px; height: 42px; }
+
+  .site-header__menu-open span { width: 28px; height: 2px; background: var(--color-lime); }
+
+  .site-nav { position: fixed; top: 0; right: 0; z-index: 80; width: min(100%,380px); height: 100dvh; padding: 5.5rem 2rem 2rem; display: flex; flex-direction: column; align-items: stretch; justify-content: flex-start; gap: .4rem; background: var(--color-navy); border-left: 1px solid var(--color-navy-line); box-shadow: -1rem 0 3rem var(--color-shadow); transform: translateX(103%); visibility: hidden; pointer-events: none; transition: transform var(--duration-medium) var(--ease-in-out), visibility var(--duration-medium); }
+
+  .site-nav:target { transform: translateX(0); visibility: visible; pointer-events: auto; }
+
+  .site-nav__link { display: block; padding: .75rem 0; font: 500 1.4rem/1.2 var(--font-display); }
+
+  .site-nav__link::after { bottom: .4rem; }
+
+  .site-nav__close { display: block; position: absolute; top: 1.5rem; right: 2rem; font-size: .85rem; }
+
+  .site-nav__close span { font-size: 1.5rem; vertical-align: middle; }
+
+  .hero__layout { grid-template-columns: 1fr; min-height: auto; padding-top: 5rem; }
+
+  .hero__title { font-size: clamp(4rem,11vw,7rem); }
+
+  .hero__visual { width: min(100%,460px); height: 390px; margin-left: auto; }
+
+  .about__layout, .experience__layout, .interests__layout { grid-template-columns: 1fr; }
+
+  .about__copy { padding-top: 0; }
+
+  .journey__intro, .projects__intro { align-items: start; flex-direction: column; margin-bottom: 3rem; }
+
+  .project { grid-template-columns: 1fr; }
+
+  .project__body { padding: 2.5rem 0; }
+
+  .record { padding-top: 2rem; }
+
+  .record__disc { max-width: 340px; }
+
+}
+
+@media (max-width: 520px) {
+
+  :root { --gutter: 1.25rem; --space-section: 5rem; --font-size-heading: clamp(3.05rem,12.4vw,4.75rem); }
+
+  .section__rail { margin-bottom: 3.2rem; gap: .8rem; }
+
+  .section__number { font-size: .65rem; }
+
+  .hero__layout { padding-top: 4rem; gap: 1.5rem; }
+
+  .hero__title { font-size: clamp(3.6rem,13.8vw,5.8rem); margin-block: 2rem 1.5rem; }
+
+  .hero__actions { align-items: flex-start; flex-direction: column; }
+
+  .hero__visual { height: 310px; }
+
+  .hero__orbit { width: 95px; }
+
+  .timeline__item { grid-template-columns: 1fr 1.5rem; gap: .65rem; }
+
+  .timeline__date { grid-column: 1 / -1; }
+
+  .timeline__body h3 { font-size: 1.7rem; }
+
+  .accordion__summary { grid-template-columns: 1.4rem 1fr 1.5rem; gap: .7rem; }
+
+  .accordion__content { padding-left: 2.1rem; }
+
+  .project__media { min-height: 240px; }
+
+  .record__disc { max-width: 275px; box-shadow: 16px 16px 0 var(--color-lime); }
+
+  .contact__heading { font-size: clamp(3.55rem,13vw,6rem); }
+
+  .contact__bottom { align-items: flex-start; flex-direction: column; }
+
+  .site-footer__inner { padding-block: 1.5rem; }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  html { scroll-behavior: auto; }
+
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+
+  .scroll-progress { display: none; }
+
+  .reveal { opacity: 1 !important; transform: none !important; }
+
+  .hero__orbit { transform: rotate(-25deg) !important; }
+
+  .hero__ticker-track { transform: none !important; }
+
+}
+
+
+
+/* ============================================================
+
+   ANIMATED EDUCATION & JOURNEY TIMELINE
+
+   EDIT THIS: Change spacing, colours or animation durations.
+
+   ============================================================ */
+
+
+
+/* Main timeline layout */
+
+.journey--animated .journey__intro {
+
+  margin-bottom: 5rem;
+
+}
+
+
+
+.journey-timeline {
+
+  position: relative;
+
+  display: grid;
+
+  gap: 2rem;
+
+  padding-block: 2rem 4rem;
+
+  isolation: isolate;
+
+}
+
+
+
+/* Central line */
+
+.journey-timeline__track {
+
+  position: absolute;
+
+  top: 0;
+
+  bottom: 0;
+
+  left: 50%;
+
+  width: 3px;
+
+  background: rgba(246, 240, 224, .18);
+
+  transform: translateX(-50%);
+
+}
+
+
+
+/* Animated lime progress line */
+
+.journey-timeline__progress {
+
+  display: block;
+
+  width: 100%;
+
+  height: 100%;
+
+  background: var(--color-lime);
+
+  transform: scaleY(0);
+
+  transform-origin: top;
+
+}
+
+
+
+/* Individual timeline milestones */
+
+.journey-timeline__item {
+
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  min-height: 270px;
+
+  align-items: center;
+
+}
+
+
+
+/* Content panel */
+
+.journey-timeline__content {
+
+  position: relative;
+
+  width: calc(100% - 3rem);
+
+  padding: clamp(1.4rem, 3vw, 2.5rem);
+
+  border: 1px solid rgba(246, 240, 224, .22);
+
+  background: var(--color-navy-soft);
+
+  transition:
+
+    transform var(--duration-medium) var(--ease-out),
+
+    border-color var(--duration-medium) var(--ease-out),
+
+    box-shadow var(--duration-medium) var(--ease-out);
+
+}
+
+
+
+/* Alternating left / right */
+
+.journey-timeline__item--left
+
+.journey-timeline__content {
+
+  grid-column: 1;
+
+  justify-self: start;
+
+}
+
+
+
+.journey-timeline__item--right
+
+.journey-timeline__content {
+
+  grid-column: 2;
+
+  justify-self: end;
+
+}
+
+
+
+/* Dot on timeline */
+
+.journey-timeline__dot {
+
+  position: absolute;
+
+  z-index: 2;
+
+  top: 50%;
+
+  left: 50%;
+
+  width: 18px;
+
+  height: 18px;
+
+  border: 3px solid var(--color-lime);
+
+  border-radius: 50%;
+
+  background: var(--color-navy);
+
+  transform: translate(-50%, -50%);
+
+  box-shadow: 0 0 0 7px var(--color-navy);
+
+  transition:
+
+    background var(--duration-fast),
+
+    box-shadow var(--duration-medium),
+
+    scale var(--duration-medium);
+
+}
+
+
+
+/* Connector from card to center */
+
+.journey-timeline__content::after {
+
+  content: "";
+
+  position: absolute;
+
+  top: 50%;
+
+  width: 3rem;
+
+  height: 1px;
+
+  background: var(--color-lime);
+
+}
+
+
+
+.journey-timeline__item--left
+
+.journey-timeline__content::after {
+
+  left: 100%;
+
+}
+
+
+
+.journey-timeline__item--right
+
+.journey-timeline__content::after {
+
+  right: 100%;
+
+}
+
+
+
+/* Timeline typography */
+
+.journey-timeline__year {
+
+  display: block;
+
+  margin-bottom: 1rem;
+
+  color: var(--color-lime);
+
+  font-family: var(--font-display);
+
+  font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+
+  font-weight: 700;
+
+  letter-spacing: -.04em;
+
+}
+
+
+
+.journey-timeline__type {
+
+  display: block;
+
+  margin-bottom: .8rem;
+
+  color: var(--color-cream-muted);
+
+  font-size: .65rem;
+
+  letter-spacing: .18em;
+
+  font-weight: 700;
+
+}
+
+
+
+.journey-timeline__content h3 {
+
+  margin: 0 0 .8rem;
+
+  font-family: var(--font-display);
+
+  font-size: clamp(1.45rem, 2.6vw, 2.6rem);
+
+  line-height: 1.1;
+
+  letter-spacing: -.05em;
+
+}
+
+
+
+.journey-timeline__place {
+
+  margin-bottom: .8rem;
+
+  color: var(--color-lime);
+
+  font-weight: 600;
+
+  font-size: .9rem;
+
+}
+
+
+
+.journey-timeline__description {
+
+  margin: 0;
+
+  color: var(--color-cream-muted);
+
+  font-size: .92rem;
+
+  line-height: 1.65;
+
+}
+
+
+
+/* Interactive milestone hover */
+
+.journey-timeline__content:hover {
+
+  transform: translateY(-7px);
+
+  border-color: var(--color-lime);
+
+  box-shadow: 8px 8px 0 rgba(200, 240, 60, .12);
+
+}
+
+
+
+.journey-timeline__item:has(
+
+  .journey-timeline__content:hover
+
+) .journey-timeline__dot {
+
+  background: var(--color-lime);
+
+  box-shadow: 0 0 0 10px rgba(200,240,60,.15);
+
+}
+
+
+
+/* ============================================================
+
+   SCROLL-TRIGGERED ANIMATIONS
+
+   Browser fallback: all milestones remain visible.
+
+   ============================================================ */
+
+
+
+@keyframes journey-line-grow {
+
+  from { transform: scaleY(0); }
+
+  to   { transform: scaleY(1); }
+
+}
+
+
+
+@keyframes journey-enter-left {
+
+  from {
+
+    opacity: 0;
+
+    transform: translateX(-60px);
+
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform: translateX(0);
+
+  }
+
+}
+
+
+
+@keyframes journey-enter-right {
+
+  from {
+
+    opacity: 0;
+
+    transform: translateX(60px);
+
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform: translateX(0);
+
+  }
+
+}
+
+
+
+@keyframes journey-dot-pop {
+
+  from { scale: .5; }
+
+  to   { scale: 1; }
+
+}
+
+
+
+/* Only animate where scroll timelines are supported */
+
+@supports (animation-timeline: scroll()) {
+
+  .journey-timeline__progress {
+
+    animation: journey-line-grow linear both;
+
+    animation-timeline: view(block);
+
+    animation-range: entry 0% exit 100%;
+
+  }
+
+}
+
+
+
+@supports (animation-timeline: view()) {
+
+  .journey-timeline__item--left
+
+  .journey-timeline__content {
+
+    animation: journey-enter-left linear both;
+
+    animation-timeline: view(block);
+
+    animation-range: entry 0% cover 32%;
+
+  }
+
+
+
+  .journey-timeline__item--right
+
+  .journey-timeline__content {
+
+    animation: journey-enter-right linear both;
+
+    animation-timeline: view(block);
+
+    animation-range: entry 0% cover 32%;
+
+  }
+
+
+
+  .journey-timeline__dot {
+
+    animation: journey-dot-pop linear both;
+
+    animation-timeline: view(block);
+
+    animation-range: entry 0% cover 32%;
+
+  }
+
+}
+
+
+
+/* ============================================================
+
+   MOBILE TIMELINE
+
+   Center line moves to the left to maximize readability.
+
+   ============================================================ */
+
+
+
+@media (max-width: 700px) {
+
+  .journey--animated .journey__intro {
+
+    margin-bottom: 2.5rem;
+
+  }
+
+
+
+  .journey-timeline {
+
+    gap: 1.5rem;
+
+    padding-left: 2.4rem;
+
+  }
+
+
+
+  .journey-timeline__track {
+
+    left: .65rem;
+
+    transform: none;
+
+  }
+
+
+
+  .journey-timeline__item {
+
+    display: block;
+
+    min-height: auto;
+
+  }
+
+
+
+  .journey-timeline__content {
+
+    width: 100%;
+
+    padding: 1.5rem;
+
+  }
+
+
+
+  .journey-timeline__dot {
+
+    left: -1.75rem;
+
+    top: 2.5rem;
+
+  }
+
+
+
+  .journey-timeline__content::after {
+
+    top: 2.5rem;
+
+    width: 1.75rem;
+
+  }
+
+
+
+  .journey-timeline__item--left
+
+  .journey-timeline__content::after,
+
+  .journey-timeline__item--right
+
+  .journey-timeline__content::after {
+
+    left: auto;
+
+    right: 100%;
+
+  }
+
+
+
+  .journey-timeline__year {
+
+    font-size: 1.5rem;
+
+  }
+
+}
+
+
+
+/* Accessibility — disable all motion if requested */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .journey-timeline__progress {
+
+    animation: none !important;
+
+    transform: scaleY(1) !important;
+
+  }
+
+
+
+  .journey-timeline__content,
+
+  .journey-timeline__dot {
+
+    animation: none !important;
+
+    opacity: 1 !important;
+
+    transform: none;
+
+  }
+
+
+
+  .journey-timeline__dot {
+
+    transform: translate(-50%, -50%);
+
+  }
+
+}
+
+
+
+/* ==================================================
+
+   THE OTHER SIDE OF ME
+
+   Interactive interests — CSS only
+
+   ================================================== */
+
+
+
+.other-side__intro {
+
+  max-width: 850px;
+
+  margin-bottom: 4rem;
+
+}
+
+
+
+.other-side__intro > p:last-child {
+
+  max-width: 540px;
+
+  margin-top: 2rem;
+
+  color: var(--color-cream-muted);
+
+  font-size: 1.05rem;
+
+}
+
+
+
+.other-side__grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 1rem;
+
+}
+
+
+
+/* Interactive interest panels */
+
+.interest-tile {
+
+  position: relative;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  min-height: 380px;
+
+  padding: clamp(1.4rem, 3vw, 2.5rem);
+
+  overflow: hidden;
+
+  isolation: isolate;
+
+  border: 1px solid rgba(246,240,224,.25);
+
+  background: var(--color-navy-soft);
+
+  transition:
+
+    border-color 450ms var(--ease-out),
+
+    transform 450ms var(--ease-out);
+
+}
+
+
+
+/* Lime overlay wipe */
+
+.interest-tile::before {
+
+  content: "";
+
+  position: absolute;
+
+  z-index: -1;
+
+  inset: 0;
+
+  background: var(--color-lime);
+
+  clip-path: inset(100% 0 0 0);
+
+  transition: clip-path 580ms var(--ease-in-out);
+
+}
+
+
+
+.interest-tile:hover::before,
+
+.interest-tile:focus-visible::before {
+
+  clip-path: inset(0 0 0 0);
+
+}
+
+
+
+.interest-tile:hover,
+
+.interest-tile:focus-visible {
+
+  color: var(--color-navy);
+
+  border-color: var(--color-lime);
+
+  transform: translateY(-5px);
+
+  outline-offset: 3px;
+
+}
+
+
+
+/* Numbers */
+
+.interest-tile__number {
+
+  font-size: .75rem;
+
+  letter-spacing: .13em;
+
+  font-weight: 700;
+
+}
+
+
+
+/* Decorative CSS symbols */
+
+.interest-tile__art {
+
+  display: grid;
+
+  place-items: center;
+
+  flex: 1;
+
+  min-height: 150px;
+
+}
+
+
+
+.interest-tile__symbol {
+
+  font-family: var(--font-display);
+
+  font-size: clamp(6rem, 12vw, 12rem);
+
+  line-height: 1;
+
+  color: var(--color-lime);
+
+  transition:
+
+    transform 580ms var(--ease-out),
+
+    color 450ms var(--ease-out);
+
+}
+
+
+
+.interest-tile:hover .interest-tile__symbol,
+
+.interest-tile:focus-visible .interest-tile__symbol {
+
+  transform: rotate(-15deg) scale(1.18);
+
+  color: var(--color-navy);
+
+}
+
+
+
+/* Title */
+
+.interest-tile__info > p {
+
+  margin-bottom: .7rem;
+
+  font-size: .7rem;
+
+  font-weight: 700;
+
+  letter-spacing: .13em;
+
+}
+
+
+
+.interest-tile__info h3 {
+
+  margin: 0;
+
+  font-size: clamp(2.2rem, 4vw, 4.8rem);
+
+  letter-spacing: -.07em;
+
+}
+
+
+
+.interest-tile__info h3 span {
+
+  color: var(--color-lime);
+
+}
+
+
+
+.interest-tile:hover h3 span,
+
+.interest-tile:focus-visible h3 span {
+
+  color: var(--color-navy);
+
+}
+
+
+
+/* Expandable descriptions */
+
+.interest-tile__detail {
+
+  display: grid;
+
+  grid-template-rows: 0fr;
+
+  opacity: 0;
+
+  transition:
+
+    grid-template-rows 450ms var(--ease-out),
+
+    opacity 450ms var(--ease-out);
+
+}
+
+
+
+.interest-tile__detail > span {
+
+  display: block;
+
+  overflow: hidden;
+
+  font-size: .9rem;
+
+  line-height: 1.6;
+
+}
+
+
+
+.interest-tile:hover .interest-tile__detail,
+
+.interest-tile:focus-visible .interest-tile__detail {
+
+  grid-template-rows: 1fr;
+
+  opacity: 1;
+
+}
+
+
+
+.interest-tile__detail > span {
+
+  padding-top: 0;
+
+}
+
+
+
+.interest-tile:hover .interest-tile__detail > span,
+
+.interest-tile:focus-visible .interest-tile__detail > span {
+
+  padding-top: .8rem;
+
+}
+
+
+
+/* Closing statement */
+
+.other-side__closing {
+
+  margin-top: 4rem;
+
+  font-family: var(--font-display);
+
+  font-size: clamp(1.5rem, 3vw, 3rem);
+
+  letter-spacing: -.05em;
+
+}
+
+
+
+.other-side__closing span {
+
+  color: var(--color-lime);
+
+}
+
+
+
+/* Responsive layout */
+
+@media (max-width: 700px) {
+
+  .other-side__grid {
+
+    grid-template-columns: 1fr;
+
+  }
+
+
+
+  .interest-tile {
+
+    min-height: 300px;
+
+  }
+
+
+
+  .interest-tile__symbol {
+
+    font-size: 7rem;
+
+  }
+
+
+
+  /* Descriptions stay visible on touchscreens */
+
+  .interest-tile__detail {
+
+    grid-template-rows: 1fr;
+
+    opacity: 1;
+
+  }
+
+
+
+  .interest-tile__detail > span {
+
+    padding-top: .8rem;
+
+  }
+
+}
+
+
+
+/* Motion accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .interest-tile,
+
+  .interest-tile::before,
+
+  .interest-tile__symbol,
+
+  .interest-tile__detail {
+
+    transition: none !important;
+
+  }
+
+}
+
+
+
+/* ============================================================
+
+   EDUCATION JOURNEY — SCROLL-ANIMATED ADVENTURE MAP
+
+   ============================================================ */
+
+
+
+/* Section heading */
+
+.journey-map__intro {
+
+  max-width: 1050px;
+
+  margin-bottom: 5rem;
+
+}
+
+
+
+.journey-map__intro > p:last-child {
+
+  max-width: 600px;
+
+  margin-top: 2rem;
+
+  color: var(--color-cream-muted);
+
+}
+
+
+
+/* Journey map */
+
+.journey-map {
+
+  position: relative;
+
+  display: grid;
+
+  grid-template-rows: repeat(4, minmax(350px, auto));
+
+  isolation: isolate;
+
+}
+
+
+
+/* Winding SVG path */
+
+.journey-map__route {
+
+  position: absolute;
+
+  z-index: -1;
+
+  inset: 0;
+
+  width: 100%;
+
+  height: 100%;
+
+  overflow: visible;
+
+  pointer-events: none;
+
+}
+
+
+
+.journey-map__route-base {
+
+  fill: none;
+
+  stroke: rgba(246,240,224,.20);
+
+  stroke-width: .24;
+
+  stroke-dasharray: .7 1.2;
+
+  vector-effect: non-scaling-stroke;
+
+  stroke-width: 2px;
+
+}
+
+
+
+.journey-map__route-progress {
+
+  fill: none;
+
+  stroke: var(--color-lime);
+
+  stroke-width: 3px;
+
+  stroke-linecap: round;
+
+  vector-effect: non-scaling-stroke;
+
+
+
+  stroke-dasharray: 100;
+
+  stroke-dashoffset: 0;
+
+}
+
+
+
+/* Each destination */
+
+.journey-stop {
+
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  align-items: center;
+
+  min-height: 350px;
+
+}
+
+
+
+/* Milestone marker */
+
+.journey-stop__marker {
+
+  position: absolute;
+
+  z-index: 2;
+
+  top: 50%;
+
+  left: 50%;
+
+  width: 52px;
+
+  height: 52px;
+
+
+
+  display: grid;
+
+  place-items: center;
+
+
+
+  background: var(--color-navy);
+
+  color: var(--color-lime);
+
+
+
+  border: 2px solid var(--color-lime);
+
+  border-radius: 50%;
+
+
+
+  transform: translate(-50%, -50%);
+
+
+
+  box-shadow: 0 0 0 10px var(--color-navy);
+
+}
+
+
+
+.journey-stop__marker span {
+
+  font: 700 .85rem var(--font-display);
+
+}
+
+
+
+/* Milestone cards */
+
+.journey-stop__card {
+
+  width: calc(100% - 4rem);
+
+  padding: clamp(1.5rem, 3vw, 2.7rem);
+
+
+
+  background: var(--color-navy-soft);
+
+  border: 1px solid rgba(246,240,224,.22);
+
+
+
+  transition:
+
+    border-color 450ms var(--ease-out),
+
+    transform 450ms var(--ease-out),
+
+    box-shadow 450ms var(--ease-out);
+
+}
+
+
+
+/* Alternating layout */
+
+.journey-stop--left .journey-stop__card {
+
+  grid-column: 1;
+
+  justify-self: start;
+
+}
+
+
+
+.journey-stop--right .journey-stop__card {
+
+  grid-column: 2;
+
+  justify-self: end;
+
+}
+
+
+
+/* Typography */
+
+.journey-stop__year {
+
+  display: block;
+
+  color: var(--color-lime);
+
+  font: 700 clamp(1.2rem,2vw,1.8rem) var(--font-display);
+
+  letter-spacing: -.04em;
+
+}
+
+
+
+.journey-stop__label {
+
+  display: block;
+
+  margin: .5rem 0 1.5rem;
+
+  color: var(--color-cream-muted);
+
+  font-size: .72rem;
+
+  font-weight: 700;
+
+  letter-spacing: .15em;
+
+  text-transform: uppercase;
+
+}
+
+
+
+.journey-stop__card h3 {
+
+  margin: 0 0 1.5rem;
+
+  font-size: clamp(1.7rem,3vw,3rem);
+
+  line-height: 1.1;
+
+}
+
+
+
+.journey-stop__card h3 span {
+
+  color: var(--color-lime);
+
+}
+
+
+
+.journey-stop__card h4 {
+
+  margin: 1rem 0 .5rem;
+
+  font-family: var(--font-display);
+
+  font-size: clamp(1rem,1.5vw,1.3rem);
+
+  line-height: 1.35;
+
+}
+
+
+
+.journey-stop__card p {
+
+  margin-bottom: .7rem;
+
+  color: var(--color-cream-muted);
+
+  font-size: .95rem;
+
+  line-height: 1.7;
+
+}
+
+
+
+.journey-stop__divider {
+
+  height: 1px;
+
+  margin: 1.5rem 0;
+
+  background: rgba(246,240,224,.2);
+
+}
+
+
+
+.journey-stop__vision {
+
+  color: var(--color-cream) !important;
+
+  font-size: 1.07rem !important;
+
+  font-weight: 500;
+
+}
+
+
+
+/* Special future chapter */
+
+.journey-stop__card--future {
+
+  border-color: rgba(200,240,60,.65);
+
+}
+
+
+
+/* Hover interaction */
+
+.journey-stop__card:hover {
+
+  transform: translateY(-7px);
+
+  border-color: var(--color-lime);
+
+  box-shadow: 9px 9px 0 rgba(200,240,60,.12);
+
+}
+
+
+
+.journey-stop:hover .journey-stop__marker {
+
+  background: var(--color-lime);
+
+  color: var(--color-navy);
+
+}
+
+
+
+/* End statement */
+
+.journey-map__ending {
+
+  margin: 3rem 0 0;
+
+  color: var(--color-lime);
+
+  font: 600 clamp(1.5rem,3vw,3rem) var(--font-display);
+
+  letter-spacing: -.05em;
+
+}
+
+
+
+/* ============================================================
+
+   SCROLL ANIMATIONS
+
+   ============================================================ */
+
+
+
+@keyframes route-draw {
+
+  from { stroke-dashoffset: 100; }
+
+  to { stroke-dashoffset: 0; }
+
+}
+
+
+
+@keyframes destination-left {
+
+  from {
+
+    opacity: 0;
+
+    transform: translateX(-55px);
+
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform: translateX(0);
+
+  }
+
+}
+
+
+
+@keyframes destination-right {
+
+  from {
+
+    opacity: 0;
+
+    transform: translateX(55px);
+
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform: translateX(0);
+
+  }
+
+}
+
+
+
+@keyframes marker-unlock {
+
+  from {
+
+    opacity: .35;
+
+    scale: .6;
+
+  }
+
+  to {
+
+    opacity: 1;
+
+    scale: 1;
+
+  }
+
+}
+
+
+
+/* Enhance only supported browsers */
+
+@supports (animation-timeline: view()) {
+
+  .journey-map__route-progress {
+
+    animation: route-draw linear both;
+
+    animation-timeline: view(block);
+
+    animation-range: entry 0% exit 100%;
+
+  }
+
+
+
+  .journey-stop--left .journey-stop__card {
+
+    animation: destination-left linear both;
+
+    animation-timeline: view(block);
+
+    animation-range: entry 0% cover 30%;
+
+  }
+
+
+
+  .journey-stop--right .journey-stop__card {
+
+    animation: destination-right linear both;
+
+    animation-timeline: view(block);
+
+    animation-range: entry 0% cover 30%;
+
+  }
+
+
+
+  .journey-stop__marker {
+
+    animation: marker-unlock linear both;
+
+    animation-timeline: view(block);
+
+    animation-range: entry 0% cover 35%;
+
+  }
+
+}
+
+
+
+/* ============================================================
+
+   MOBILE — vertical journey map
+
+   ============================================================ */
+
+
+
+@media (max-width: 700px) {
+
+  .journey-map__intro {
+
+    margin-bottom: 2rem;
+
+  }
+
+
+
+  .journey-map {
+
+    display: block;
+
+    padding-left: 3rem;
+
+  }
+
+
+
+  /* Replace winding desktop route with a straight mobile path */
+
+  .journey-map__route {
+
+    display: none;
+
+  }
+
+
+
+  .journey-map::before,
+
+  .journey-map::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 2rem;
+
+    bottom: 2rem;
+
+    left: 1.2rem;
+
+    width: 3px;
+
+    transform-origin: top;
+
+  }
+
+
+
+  .journey-map::before {
+
+    background: rgba(246,240,224,.2);
+
+  }
+
+
+
+  .journey-map::after {
+
+    background: var(--color-lime);
+
+  }
+
+
+
+  .journey-stop {
+
+    display: block;
+
+    min-height: auto;
+
+    margin-bottom: 3rem;
+
+  }
+
+
+
+  .journey-stop__card {
+
+    width: 100%;
+
+    padding: 1.5rem;
+
+  }
+
+
+
+  .journey-stop__marker {
+
+    left: -1.8rem;
+
+    top: 2rem;
+
+    width: 38px;
+
+    height: 38px;
+
+  }
+
+
+
+  .journey-stop__card h3 {
+
+    font-size: 1.7rem;
+
+  }
+
+
+
+  @supports (animation-timeline: view()) {
+
+    .journey-map::after {
+
+      animation: mobile-route-draw linear both;
+
+      animation-timeline: view(block);
+
+      animation-range: entry 0% exit 100%;
+
+    }
+
+  }
+
+}
+
+
+
+@keyframes mobile-route-draw {
+
+  from { transform: scaleY(0); }
+
+  to { transform: scaleY(1); }
+
+}
+
+
+
+/* ============================================================
+
+   ACCESSIBILITY
+
+   ============================================================ */
+
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  .journey-map__route-progress {
+
+    animation: none !important;
+
+    stroke-dashoffset: 0 !important;
+
+  }
+
+
+
+  .journey-stop__card,
+
+  .journey-stop__marker {
+
+    animation: none !important;
+
+    opacity: 1 !important;
+
+    transition: none !important;
+
+  }
+
+
+
+  .journey-map::after {
+
+    animation: none !important;
+
+    transform: none !important;
+
+  }
+
+}
+
+
+
+/* ==================================================
+
+   LEADERSHIP & EXPERIENCES — FIXES
+
+   ================================================== */
+
+
+
+/* Better spacing between description paragraphs */
+
+.accordion__content p + p {
+
+  margin-top: 1rem;
+
+}
+
+
+
+/* Conference list */
+
+.accordion__list {
+
+  margin: .8rem 0 0;
+
+  padding-left: 1.3rem;
+
+  color: var(--color-navy-soft);
+
+  line-height: 1.8;
+
+}
+
+
+
+.accordion__list li {
+
+  padding-left: .3rem;
+
+  margin-bottom: .5rem;
+
+}
+
+
+
+.accordion__list li::marker {
+
+  color: #688000;
+
+}
+
+
+
+/* Better accordion heading readability */
+
+.accordion__title {
+
+  overflow-wrap: anywhere;
+
+}
+
+
+
+/* Mobile layout */
+
+@media (max-width: 700px) {
+
+  .experience__layout {
+
+    grid-template-columns: 1fr;
+
+    gap: 2.5rem;
+
+  }
+
+
+
+  .accordion__content {
+
+    padding-right: 1rem;
+
+  }
+
+}
+
+/* Publishing fix: Hero has no right-hand visual in current HTML. */
+.hero__layout { grid-template-columns: minmax(0, 1fr); }
+.hero__content { max-width: 980px; }
