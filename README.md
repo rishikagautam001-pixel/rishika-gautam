@@ -1,2 +1,1 @@
-# Rishika-portfolio
-Personal portfolio of Rishika Gautam
+Final WD MT porject Rishika Gautam
